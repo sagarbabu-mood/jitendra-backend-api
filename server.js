@@ -7,8 +7,10 @@ const mongoose = require('mongoose');
 const app = express();
 
 // Connect to MongoDB
-const mongoString = process.env.DATABASE_URL;
-mongoose.connect(mongoString);
+const mongoString = process.env.DATABASE_URL + "?tls=true&tlsAllowInvalidCertificates=true";
+mongoose.connect(mongoString, { useNewUrlParser: true, useUnifiedTopology: true });
+
+
 const database = mongoose.connection;
 
 database.on('error', (error) => {
